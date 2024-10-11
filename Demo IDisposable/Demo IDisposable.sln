@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.35325.158
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDisposableUI", "IDisposableUI\IDisposableUI.csproj", "{59C90778-4999-40B8-B3F2-C997BAFEC76C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDisposableCore", "IDisposableCore\IDisposableCore.csproj", "{1C7E84E7-BB7F-47AD-BA27-724817094470}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{59C90778-4999-40B8-B3F2-C997BAFEC76C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59C90778-4999-40B8-B3F2-C997BAFEC76C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59C90778-4999-40B8-B3F2-C997BAFEC76C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59C90778-4999-40B8-B3F2-C997BAFEC76C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C7E84E7-BB7F-47AD-BA27-724817094470}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C7E84E7-BB7F-47AD-BA27-724817094470}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C7E84E7-BB7F-47AD-BA27-724817094470}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C7E84E7-BB7F-47AD-BA27-724817094470}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2E5C42FB-3EDE-49B4-825E-024695920C7C}
+	EndGlobalSection
+EndGlobal

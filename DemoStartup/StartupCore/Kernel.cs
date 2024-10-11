@@ -1,8 +1,6 @@
-﻿using Microsoft.Win32.SafeHandles;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -20,7 +18,6 @@ namespace StartupCore
 
         //  Disposable
         bool disposed = false;
-        readonly SafeHandle handle = new SafeFileHandle(IntPtr.Zero, true);
 
         public Kernel()
         {
@@ -46,13 +43,8 @@ namespace StartupCore
         {
             if (this.disposed) return;
 
-            if (disposing)
-            {
-                this.handle.Dispose();
-
-                this.isKernelEnd = true;
-                this.isEmergencyStop = true;
-            }
+            this.isKernelEnd = true;
+            this.isEmergencyStop = true;
 
             this.disposed = true;
         }

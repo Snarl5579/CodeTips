@@ -10,7 +10,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="mobile-web-app-capable" content="yes">
     <title>
-        Demo Startup Form - HackMD
+        Demo IDisposable - HackMD
     </title>
     <link rel="icon" type="image/png" href="https://hackmd.io/favicon.png">
     <link rel="apple-touch-icon" href="https://hackmd.io/apple-touch-icon.png">
@@ -54,190 +54,137 @@
 </head>
 
 <body>
-    <div id="doc" class="markdown-body container-fluid comment-enabled" data-hard-breaks="true"><h1 id="Demo-Startup-Form" data-id="Demo-Startup-Form"><a class="anchor hidden-xs" href="#Demo-Startup-Form" title="Demo-Startup-Form"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>Demo Startup Form</span></h1><p><span>為了提供使用者更流暢的使用體驗，程式在啟動時會先顯示一個啟動畫面。這段時間內，程式會在背景進行一系列的準備工作，包括：</span></p><ul>
-<li><span>載入必要的資源： 這包含了程式執行所需的各種檔案、資料庫連線等。</span></li>
-<li><span>初始化軟體環境： 建立程式運作所需的內部狀態和設定。</span></li>
-<li><span>檢查硬體設備： 確認電腦的硬體配置是否符合程式要求。</span></li>
-</ul><p><span>透過啟動畫面，使用者可以直觀地了解程式正在進行初始化，避免因等待時間過長而感到困惑。當所有準備工作就緒後，程式才會正式進入主要頁面，讓使用者可以開始操作。</span></p><h2 id="-說明" data-id="-說明"><a class="anchor hidden-xs" href="#-說明" title="-說明"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><img class="emoji offline-handled error-handled" alt=":small_blue_diamond:" src="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/images/basic/small_blue_diamond.png"><span> 說明</span></h2><p><span>啟動畫面主要由三個部分組成：</span></p><ul>
+    <div id="doc" class="markdown-body container-fluid comment-enabled" data-hard-breaks="true"><h1 id="Demo-IDisposable" data-id="Demo-IDisposable"><a class="anchor hidden-xs" href="#Demo-IDisposable" title="Demo-IDisposable"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>Demo IDisposable</span></h1><p><span>在 .NET 中，為了確保物件在不再使用時能妥善釋放資源（尤其是非託管資源，例如檔案、網路連線、資料庫連線等），我們可以實作 </span><code>IDisposable</code><span> 介面。此介面提供了一個 </span><code>Dispose()</code><span> 方法，讓開發人員能夠主動地觸發資源釋放的動作。</span></p><p><span>優點：</span></p><ul>
+<li><span>精確控制資源釋放時機：</span><br>
+<span>透過呼叫 </span><code>Dispose()</code><span>，我們可以明確地指定何時釋放資源，而不是完全交由垃圾回收機制決定。</span></li>
+<li><span>避免資源洩漏：</span><br>
+<span>及時釋放資源能防止因資源未釋放而導致的記憶體洩漏或其他問題。</span></li>
+<li><span>提高應用程式效能：</span><br>
+<span>對於耗費資源的物件，及時釋放能釋出系統資源，提升應用程式的效能。</span></li>
+</ul><h2 id="-說明" data-id="-說明"><a class="anchor hidden-xs" href="#-說明" title="-說明"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><img class="emoji offline-handled error-handled" alt=":small_blue_diamond:" src="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/images/basic/small_blue_diamond.png"><span> 說明</span></h2><p><span>實作 .NET 中的 </span><code>IDisposable</code><span> 介面，</span><code>Dispose(bool disposing)</code><span> 方法是實作 </span><code>IDisposable</code><span> 介面的關鍵。撰寫需要特別注意以下幾點：</span></p><ul>
 <li>
-<p><span>初始頁面：</span></p>
+<p><span>判斷是否已經釋放</span></p>
 <div class="alert alert-success">
-<p><span>作為程式啟動時的歡迎畫面，提供使用者友善的視覺回饋。</span></p>
+<p><span>在方法一開始，檢查一個布林旗標，確認資源是否已經被釋放。</span><br>
+<span>如果已經釋放，直接返回。</span></p>
+</div>
+</li>
+<li>
+<p><span>釋放託管資源</span></p>
+<div class="alert alert-success">
+<p><code>disposing</code><span> 為 </span><code>true</code><span>，表示是主動呼叫 </span><code>Dispose()</code><span>，可以安全地釋放託管資源。</span></p>
+</div>
+</li>
+<li>
+<p><span>釋放非託管資源</span></p>
+</li>
+<li>
+<p><span>設定釋放旗標</span></p>
+<div class="alert alert-success">
+<p><span>在釋放完資源後，將旗標設為 true，表示資源已經被釋放。</span></p>
+</div>
+</li>
+<li>
+<p><span>呼叫方式：</span></p>
+<div class="alert alert-success">
+<p><span>常見的實作方式包含使用 </span><code>using</code><span> 陳述式(自動呼叫)和手動呼叫 </span><code>Dispose()</code><span>兩種方式</span></p>
 </div>
 <ul>
-<li><span>顯示初始化進度，讓使用者了解系統正在準備中。</span></li>
-<li><span>透過動態更新畫面，提升使用者體驗。</span></li>
-</ul>
-</li>
-<li>
-<p><span>主要頁面：</span></p>
-<div class="alert alert-success">
-<p><span>程式的主要操作介面</span></p>
-</div>
-<ul>
-<li><span>在初始化完成後，無縫切換至主要頁面。</span></li>
-</ul>
-</li>
-<li>
-<p><span>核心類別：</span></p>
-<div class="alert alert-success">
-<p><span>程式計算核心，提供使用者所有核心功能。</span><br>
-<span>在啟動時，執行一系列初始化作業</span></p>
-</div>
-<ul>
-<li><span>載入必要資源（如設定檔、資料庫連線等）。</span></li>
-<li><span>建立系統物件。</span></li>
-<li><span>進行相關計算。</span></li>
-<li><span>初始化完成後，會向初始頁面發送訊號，觸發頁面轉換。</span></li>
-</ul>
-</li>
-</ul><h2 id="-引用範例" data-id="-引用範例"><a class="anchor hidden-xs" href="#-引用範例" title="-引用範例"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><img class="emoji offline-handled error-handled" alt=":small_blue_diamond:" src="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/images/basic/small_blue_diamond.png"><span> 引用範例</span></h2><ul>
-<li><span>Demo KernelTrhead</span></li>
-<li><span>Demo IDisposable</span></li>
-</ul><h2 id="-步驟" data-id="-步驟"><a class="anchor hidden-xs" href="#-步驟" title="-步驟"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><img class="emoji offline-handled error-handled" alt=":small_blue_diamond:" src="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/images/basic/small_blue_diamond.png"><span> 步驟</span></h2><ol style="padding-left: 2em;">
-<li><span>啟動初始頁面：</span><br>
-<span>程式啟動時，首先顯示初始頁面，並開始進行初始化作業。</span></li>
-<li><span>核心類別初始化：</span><br>
-<span>核心類別在背景執行初始化任務，並定期向初始頁面回傳進度。</span></li>
-<li><span>更新初始頁面：</span><br>
-<span>初始頁面根據核心類別回傳的進度，動態更新畫面，讓使用者了解初始化的進度。</span></li>
-<li><span>完成初始化：</span><br>
-<span>當核心類別的初始化作業全部完成後，會向初始頁面發送「初始化完成」的訊號。</span></li>
-<li><span>切換至主要頁面：</span><br>
-<span>初始頁面接收到訊號後，會關閉自身，並開啟主要頁面，讓使用者開始進行操作。</span></li>
-</ol><h2 id="-範例" data-id="-範例"><a class="anchor hidden-xs" href="#-範例" title="-範例"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><img class="emoji offline-handled error-handled" alt=":small_blue_diamond:" src="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/images/basic/small_blue_diamond.png"><span> 範例</span></h2><h3 id="初始頁面---StartForm" data-id="初始頁面---StartForm"><a class="anchor hidden-xs" href="#初始頁面---StartForm" title="初始頁面---StartForm"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>初始頁面 - StartForm</span></h3><ol style="padding-left: 2em;">
-<li>
-<p><span>Form 屬性 &gt; FormBorderStyle &gt; None</span></p>
-</li>
-<li>
-<p><span>Form 屬性 &gt; StartPosition &gt; CenterScreen</span></p>
-</li>
-<li>
-<p><span>Form 屬性 &gt; ShowIcon &gt; False</span></p>
-</li>
-<li>
-<p><span>Form 屬性 &gt; ShowInTaskbar &gt; False</span></p>
-</li>
-<li>
-<p><span>Form 屬性 &gt; TopMost &gt; True</span></p>
-</li>
-<li>
-<p><span>增加 labelInformation 用來顯示狀態</span></p>
-</li>
-<li>
-<p><span>新增事件通知主要頁面初始化結束</span></p>
-<pre><code class="C# hljs">​​​​<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">delegate</span> <span class="hljs-keyword">void</span> <span class="hljs-title">UserInterfaceDelegate</span>(<span class="hljs-params">UserInterfaceMessageType type, <span class="hljs-built_in">string</span>[] data</span>)</span>;
-
-​​​​<span class="hljs-keyword">public</span> UserInterfaceDelegate InitializeMessage;
+<li><span>使用 </span><code>using</code><span> 陳述式：</span><pre><code class="C# hljs">​​​​​​​​<span class="hljs-keyword">using</span> (MyDisposableObject obj = <span class="hljs-keyword">new</span> MyDisposableObject())
+​​​​​​​​{
+​​​​​​​​    <span class="hljs-comment">// 使用 obj</span>
+​​​​​​​​} <span class="hljs-comment">// 在這裡，obj 會自動呼叫 Dispose()</span>
 </code></pre>
 </li>
-<li>
-<p><span>新增函式處理核心物件的事件通知</span></p>
-<pre><code class="C# hljs">​​​​<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ViewUpdate</span>(<span class="hljs-params">UserInterfaceMessageType type, <span class="hljs-built_in">string</span>[] data</span>)
-​​​​</span>{
-​​​​    <span class="hljs-comment">// 收到初始化結束，關閉初始頁面並發送事件通知主要頁面</span>
-​​​​    <span class="hljs-keyword">if</span> (type == UserInterfaceMessageType.InitializeFinshed)
-​​​​    {
-​​​​        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.InvokeRequired)
+<li><span>手動呼叫 </span><code>Dispose()</code><span>：</span><pre><code class="C# hljs">​​​​​​​​MyDisposableObject obj = <span class="hljs-keyword">new</span> MyDisposableObject();
+
+​​​​​​​​<span class="hljs-keyword">try</span>
+​​​​​​​​{
+​​​​​​​​    <span class="hljs-comment">// 使用 obj</span>
+​​​​​​​​}
+​​​​​​​​<span class="hljs-keyword">finally</span>
+​​​​​​​​{
+​​​​​​​​    obj.Dispose();
+​​​​​​​​}
+</code></pre>
+</li>
+</ul>
+</li>
+</ul><h2 id="-引用範例" data-id="-引用範例"><a class="anchor hidden-xs" href="#-引用範例" title="-引用範例"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><img class="emoji offline-handled error-handled" alt=":small_blue_diamond:" src="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/images/basic/small_blue_diamond.png"><span> 引用範例</span></h2><h2 id="-流程" data-id="-流程"><a class="anchor hidden-xs" href="#-流程" title="-流程"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><img class="emoji offline-handled error-handled" alt=":small_blue_diamond:" src="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/images/basic/small_blue_diamond.png"><span> 流程</span></h2><ol style="padding-left: 2em;">
+<li><span>繼承 </span><code>IDisposable</code></li>
+<li><span>實作 </span><code>void Dispose(bool disposing)</code></li>
+<li><span>加入旗標判斷物件是否已經被釋放了</span></li>
+<li><span>在解構子中呼叫 </span><code>Dispose()</code></li>
+</ol><h2 id="-步驟" data-id="-步驟"><a class="anchor hidden-xs" href="#-步驟" title="-步驟"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><img class="emoji offline-handled error-handled" alt=":small_blue_diamond:" src="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/images/basic/small_blue_diamond.png"><span> 步驟</span></h2><h3 id="核心程式" data-id="核心程式"><a class="anchor hidden-xs" href="#核心程式" title="核心程式"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>核心程式</span></h3><ol style="padding-left: 2em;">
+<li><span>繼承 </span><code>IDisposable</code><pre><code class="C# hljs">​​​​<span class="hljs-comment">//  繼承 IDisposable</span>
+​​​​<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Kernel</span> : <span class="hljs-title">IDisposable</span>
+​​​​{
+​​​​}
+</code></pre>
+</li>
+<li><span>實作 </span><code>void Dispose(bool disposing)</code><pre><code class="C# hljs">​​​​<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Kernel</span> : <span class="hljs-title">IDisposable</span>
+​​​​{
+​​​​    <span class="hljs-comment">//  實作 void Dispose(bool disposing)</span>
+​​​​    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Dispose</span>(<span class="hljs-params"><span class="hljs-built_in">bool</span> disposing</span>)
+​​​​</span>    {
+​​​​        <span class="hljs-keyword">if</span> (disposing)
 ​​​​        {
-​​​​            <span class="hljs-keyword">this</span>.BeginInvoke(<span class="hljs-keyword">new</span> UserInterfaceDelegate(ViewUpdate), type, data);
-​​​​            <span class="hljs-keyword">return</span>;
+​​​​            <span class="hljs-comment">//  主動釋放，釋放託管記憶體</span>
+​​​​        }
+​​​​        
+​​​​        <span class="hljs-comment">//  釋放非託管記憶體</span>
+​​​​    }
+​​​​}
+</code></pre>
+</li>
+<li><span>加入旗標判斷物件是否已經被釋放了</span><pre><code class="C# hljs">​​​​<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Kernel</span> : <span class="hljs-title">IDisposable</span>
+​​​​{
+​​​​    <span class="hljs-comment">//  判斷旗標，確認物件已經被釋放過了</span>
+​​​​    <span class="hljs-built_in">bool</span> disposed = <span class="hljs-literal">false</span>;
+​​​​    
+​​​​    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Dispose</span>(<span class="hljs-params"><span class="hljs-built_in">bool</span> disposing</span>)
+​​​​</span>    {
+​​​​        <span class="hljs-comment">//  避免重複釋放</span>
+​​​​        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.disposed) <span class="hljs-keyword">return</span>;
+​​​​        
+​​​​        <span class="hljs-keyword">if</span> (disposing)
+​​​​        {
 ​​​​        }
 
-​​​​        <span class="hljs-comment">//  關閉初始頁面</span>
-​​​​        <span class="hljs-keyword">this</span>.Close();
-
-​​​​        <span class="hljs-comment">//  發送事件通知主要頁面</span>
-​​​​        <span class="hljs-keyword">this</span>.InitializeMessage?.Invoke(
-​​​​            UserInterfaceMessageType.InitializeFinshed, <span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>[] { <span class="hljs-string">""</span> });
+​​​​        <span class="hljs-comment">//  設定釋放旗標</span>
+​​​​        <span class="hljs-keyword">this</span>.disposed = <span class="hljs-literal">true</span>;
 ​​​​    }
-
-
-​​​​    <span class="hljs-keyword">if</span> (type != UserInterfaceMessageType.InitializeMessage) <span class="hljs-keyword">return</span>;
-​​​​    <span class="hljs-keyword">if</span> (data == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span>;
-​​​​    <span class="hljs-keyword">if</span> (data.Length == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span>;
-
-​​​​    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.labelInformation.InvokeRequired)
-​​​​    {
-​​​​        <span class="hljs-keyword">this</span>.labelInformation.BeginInvoke(<span class="hljs-keyword">new</span> UserInterfaceDelegate(ViewUpdate), type, data);
-​​​​        <span class="hljs-keyword">return</span>;
-​​​​    }
-
-​​​​    <span class="hljs-comment">//  更新初始資訊</span>
-​​​​    <span class="hljs-keyword">this</span>.labelInformation.Text = data[<span class="hljs-number">0</span>];
 ​​​​}
 </code></pre>
 </li>
-</ol><h3 id="主要頁面---MainForm" data-id="主要頁面---MainForm"><a class="anchor hidden-xs" href="#主要頁面---MainForm" title="主要頁面---MainForm"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>主要頁面 - MainForm</span></h3><ol style="padding-left: 2em;">
-<li>
-<p><span>新增函式處理初始頁面的事件通知</span></p>
-<pre><code class="C# hljs">​​​​<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Startup</span>(<span class="hljs-params">UserInterfaceMessageType type, <span class="hljs-built_in">string</span>[] data</span>)
-​​​​</span>{
-​​​​    <span class="hljs-keyword">if</span> (type == UserInterfaceMessageType.InitializeFinshed)
+<li><span>在解構子中呼叫 </span><code>Dispose()</code><pre><code class="C# hljs">​​​​<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Kernel</span> : <span class="hljs-title">IDisposable</span>
+​​​​{
+​​​​    <span class="hljs-comment">//  判斷旗標，確認物件已經被釋放過了</span>
+​​​​    <span class="hljs-built_in">bool</span> disposed = <span class="hljs-literal">false</span>;
+​​​​    
+​​​​    <span class="hljs-comment">//  解構子中確認資源被釋放</span>
+​​​​    ~Kernel()
 ​​​​    {
-​​​​        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.InvokeRequired)
+​​​​        <span class="hljs-keyword">this</span>.Dispose(<span class="hljs-literal">true</span>);
+​​​​    }
+​​​​    
+​​​​    <span class="hljs-comment">//  提供公開方法，主動釋放記憶體</span>
+​​​​    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Dispose</span>()
+​​​​</span>    {
+​​​​        <span class="hljs-keyword">this</span>.Dispose(<span class="hljs-literal">true</span>);
+​​​​        GC.SuppressFinalize(<span class="hljs-keyword">this</span>);
+​​​​    }
+​​​​    
+​​​​    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Dispose</span>(<span class="hljs-params"><span class="hljs-built_in">bool</span> disposing</span>)
+​​​​</span>    {
+​​​​        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.disposed) <span class="hljs-keyword">return</span>;
+​​​​        
+​​​​        <span class="hljs-keyword">if</span> (disposing)
 ​​​​        {
-​​​​            <span class="hljs-keyword">this</span>.BeginInvoke(<span class="hljs-keyword">new</span> UserInterfaceDelegate(Startup), type, data);
-​​​​            <span class="hljs-keyword">return</span>;
 ​​​​        }
-
-​​​​        <span class="hljs-keyword">this</span>.Show();
+​​​​        
+​​​​        <span class="hljs-keyword">this</span>.disposed = <span class="hljs-literal">true</span>;
 ​​​​    }
-​​​​}
-</code></pre>
-</li>
-<li>
-<p><span>新增表單關閉事件，通知系統應用程式關閉</span></p>
-<pre><code class="C# hljs">​​​​<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">MainFormClosed</span>(<span class="hljs-params"><span class="hljs-built_in">object</span> sender, FormClosedEventArgs e</span>)
-​​​​</span>{
-​​​​    Application.Exit();
-​​​​}
-</code></pre>
-</li>
-</ol><h3 id="核心類別---Kernel" data-id="核心類別---Kernel"><a class="anchor hidden-xs" href="#核心類別---Kernel" title="核心類別---Kernel"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>核心類別 - Kernel</span></h3><ol style="padding-left: 2em;">
-<li><span>增加函式進行初始化計算</span><pre><code class="C# hljs">​​​​<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">KernelInitialize</span>()
-​​​​</span>{
-​​​​    <span class="hljs-keyword">this</span>.InitializeMessage?.Invoke(
-​​​​        UserInterfaceMessageType.InitializeMessage,
-​​​​        <span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>[] { <span class="hljs-string">"Unit 1"</span> });
-​​​​    Thread.Sleep(<span class="hljs-number">1000</span>);
-
-​​​​    <span class="hljs-keyword">this</span>.InitializeMessage?.Invoke(
-​​​​        UserInterfaceMessageType.InitializeMessage,
-​​​​        <span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>[] { <span class="hljs-string">"Unit 2"</span> });
-​​​​    Thread.Sleep(<span class="hljs-number">1000</span>);
-
-​​​​    <span class="hljs-keyword">this</span>.InitializeMessage?.Invoke(
-​​​​        UserInterfaceMessageType.InitializeMessage,
-​​​​        <span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>[] { <span class="hljs-string">"Unit 3"</span> });
-​​​​    Thread.Sleep(<span class="hljs-number">1000</span>);
-​​​​}
-</code></pre>
-</li>
-</ol><h3 id="Programcs" data-id="Programcs"><a class="anchor hidden-xs" href="#Programcs" title="Programcs"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>Program.cs</span></h3><ol style="padding-left: 2em;">
-<li><span>建立初始畫面、主要畫面和核心，並且註冊事件</span><pre><code class="C# hljs">​​​​<span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>()
-​​​​</span>{
-​​​​    Application.EnableVisualStyles();
-​​​​    Application.SetCompatibleTextRenderingDefault(<span class="hljs-literal">false</span>);
-
-​​​​    MainForm mainForm = <span class="hljs-keyword">new</span> MainForm();
-
-​​​​    <span class="hljs-comment">//  註冊初始頁面事件，通知主要頁面開啟</span>
-​​​​    StartForm startForm = <span class="hljs-keyword">new</span> StartForm();
-​​​​    startForm.InitializeMessage += mainForm.Startup;
-
-​​​​    <span class="hljs-comment">//  註冊核心物件事件，通知初始頁面更新初始狀態</span>
-​​​​    Kernel core = <span class="hljs-keyword">new</span> Kernel();
-​​​​    core.InitializeMessage += startForm.ViewUpdate;
-
-​​​​    <span class="hljs-comment">//  顯示初始頁面，並且初始化</span>
-​​​​    startForm.Show();
-​​​​    core.Initialize();
-
-​​​​    Application.Run();
-
-​​​​    <span class="hljs-comment">//  釋放記憶體</span>
-​​​​    core.Dispose();
 ​​​​}
 </code></pre>
 </li>
@@ -249,15 +196,12 @@
             </a>
             <ul id="ui-toc" class="ui-toc-dropdown dropdown-menu" aria-labelledby="tocLabel">
                 <div class="toc"><ul class="nav">
-<li><a href="#Demo-Startup-Form" title="Demo Startup Form">Demo Startup Form</a><ul class="nav">
-<li><a href="#-說明" title=" 說明"> 說明</a></li>
-<li><a href="#-引用範例" title=" 引用範例"> 引用範例</a></li>
-<li><a href="#-步驟" title=" 步驟"> 步驟</a></li>
-<li><a href="#-範例" title=" 範例"> 範例</a><ul class="nav">
-<li><a href="#初始頁面---StartForm" title="初始頁面 - StartForm">初始頁面 - StartForm</a></li>
-<li><a href="#主要頁面---MainForm" title="主要頁面 - MainForm">主要頁面 - MainForm</a></li>
-<li><a href="#核心類別---Kernel" title="核心類別 - Kernel">核心類別 - Kernel</a></li>
-<li><a href="#Programcs" title="Program.cs">Program.cs</a></li>
+<li class=""><a href="#Demo-IDisposable" title="Demo IDisposable">Demo IDisposable</a><ul class="nav">
+<li class=""><a href="#-說明" title=" 說明"> 說明</a></li>
+<li class=""><a href="#-引用範例" title=" 引用範例"> 引用範例</a></li>
+<li class=""><a href="#-流程" title=" 流程"> 流程</a></li>
+<li class=""><a href="#-步驟" title=" 步驟"> 步驟</a><ul class="nav">
+<li class=""><a href="#核心程式" title="核心程式">核心程式</a></li>
 </ul>
 </li>
 </ul>
@@ -269,15 +213,12 @@
     </div>
     <div id="ui-toc-affix" class="ui-affix-toc ui-toc-dropdown unselectable hidden-print" data-spy="affix" style="top:17px;display:none;"  >
         <div class="toc"><ul class="nav">
-<li><a href="#Demo-Startup-Form" title="Demo Startup Form">Demo Startup Form</a><ul class="nav">
-<li><a href="#-說明" title=" 說明"> 說明</a></li>
-<li><a href="#-引用範例" title=" 引用範例"> 引用範例</a></li>
-<li><a href="#-步驟" title=" 步驟"> 步驟</a></li>
-<li><a href="#-範例" title=" 範例"> 範例</a><ul class="nav">
-<li><a href="#初始頁面---StartForm" title="初始頁面 - StartForm">初始頁面 - StartForm</a></li>
-<li><a href="#主要頁面---MainForm" title="主要頁面 - MainForm">主要頁面 - MainForm</a></li>
-<li><a href="#核心類別---Kernel" title="核心類別 - Kernel">核心類別 - Kernel</a></li>
-<li><a href="#Programcs" title="Program.cs">Program.cs</a></li>
+<li class=""><a href="#Demo-IDisposable" title="Demo IDisposable">Demo IDisposable</a><ul class="nav">
+<li class=""><a href="#-說明" title=" 說明"> 說明</a></li>
+<li class=""><a href="#-引用範例" title=" 引用範例"> 引用範例</a></li>
+<li class=""><a href="#-流程" title=" 流程"> 流程</a></li>
+<li class=""><a href="#-步驟" title=" 步驟"> 步驟</a><ul class="nav">
+<li class=""><a href="#核心程式" title="核心程式">核心程式</a></li>
 </ul>
 </li>
 </ul>

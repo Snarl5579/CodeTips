@@ -1,5 +1,5 @@
 ﻿
-namespace KernelThreadUI
+namespace IDisposableUI
 {
     partial class MainForm
     {
@@ -29,20 +29,10 @@ namespace KernelThreadUI
         /// </summary>
         private void InitializeComponent()
         {
-            this.richTextBoxLog = new System.Windows.Forms.RichTextBox();
             this.labelView = new System.Windows.Forms.Label();
+            this.richTextBoxLog = new System.Windows.Forms.RichTextBox();
+            this.buttonDemo = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // richTextBoxLog
-            // 
-            this.richTextBoxLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBoxLog.Location = new System.Drawing.Point(12, 103);
-            this.richTextBoxLog.Name = "richTextBoxLog";
-            this.richTextBoxLog.Size = new System.Drawing.Size(776, 335);
-            this.richTextBoxLog.TabIndex = 0;
-            this.richTextBoxLog.Text = "";
             // 
             // labelView
             // 
@@ -52,28 +42,52 @@ namespace KernelThreadUI
             this.labelView.Name = "labelView";
             this.labelView.Size = new System.Drawing.Size(800, 100);
             this.labelView.TabIndex = 1;
-            this.labelView.Text = "This is a Demo of KernelThread";
+            this.labelView.Text = "This is a Demo of IDisposable";
             this.labelView.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // richTextBoxLog
+            // 
+            this.richTextBoxLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBoxLog.Location = new System.Drawing.Point(12, 103);
+            this.richTextBoxLog.Name = "richTextBoxLog";
+            this.richTextBoxLog.Size = new System.Drawing.Size(776, 229);
+            this.richTextBoxLog.TabIndex = 2;
+            this.richTextBoxLog.Text = "";
+            // 
+            // buttonDemo
+            // 
+            this.buttonDemo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonDemo.Font = new System.Drawing.Font("新細明體", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.buttonDemo.Location = new System.Drawing.Point(12, 338);
+            this.buttonDemo.Name = "buttonDemo";
+            this.buttonDemo.Size = new System.Drawing.Size(776, 100);
+            this.buttonDemo.TabIndex = 3;
+            this.buttonDemo.Text = "Click to Demo";
+            this.buttonDemo.UseVisualStyleBackColor = true;
+            this.buttonDemo.Click += new System.EventHandler(this.DemoClick);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.labelView);
+            this.Controls.Add(this.buttonDemo);
             this.Controls.Add(this.richTextBoxLog);
+            this.Controls.Add(this.labelView);
             this.Name = "MainForm";
-            this.Text = "KernelThread";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainFormClosed);
-            this.Load += new System.EventHandler(this.MainFormLoad);
+            this.Text = "IDisposable";
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.RichTextBox richTextBoxLog;
         private System.Windows.Forms.Label labelView;
+        private System.Windows.Forms.RichTextBox richTextBoxLog;
+        private System.Windows.Forms.Button buttonDemo;
     }
 }
 

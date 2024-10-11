@@ -107,10 +107,15 @@
 <li><span>釋放佔用的資源</span></li>
 </ul>
 </li>
-</ul><h2 id="-流程" data-id="-流程"><a class="anchor hidden-xs" href="#-流程" title="-流程"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><img class="emoji offline-handled error-handled" alt=":small_blue_diamond:" src="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/images/basic/small_blue_diamond.png"><span> 流程</span></h2><ol style="padding-left: 2em;">
-<li><span>建立核心函式</span></li>
-<li><span>使用 Thread 執行核心函式</span></li>
-<li><span>建立終止條件結束無窮迴圈</span></li>
+</ul><h2 id="-引用範例" data-id="-引用範例"><a class="anchor hidden-xs" href="#-引用範例" title="-引用範例"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><img class="emoji offline-handled error-handled" alt=":small_blue_diamond:" src="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/images/basic/small_blue_diamond.png"><span> 引用範例</span></h2><ul>
+<li><span>Demo IDisposable</span></li>
+</ul><h2 id="-步驟" data-id="-步驟"><a class="anchor hidden-xs" href="#-步驟" title="-步驟"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><img class="emoji offline-handled error-handled" alt=":small_blue_diamond:" src="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/images/basic/small_blue_diamond.png"><span> 步驟</span></h2><ol style="padding-left: 2em;">
+<li><span>建立核心函式：</span><br>
+<span>核心函式中須包含條件停止迴圈、命令與等待切換、緊急停止命令機制。</span></li>
+<li><span>使用 Thread 執行核心函式：</span><br>
+<span>使用執行緒來平行運算核心函式。</span></li>
+<li><span>使用 IDisposable 在解構物件時停止核心迴圈</span><br>
+<span>繼承 .NET 的 IDisposable 讓物件可以主動釋放記憶體，在釋放同時停止核心迴圈。</span></li>
 </ol><h2 id="-範例" data-id="-範例"><a class="anchor hidden-xs" href="#-範例" title="-範例"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><img class="emoji offline-handled error-handled" alt=":small_blue_diamond:" src="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/images/basic/small_blue_diamond.png"><span> 範例</span></h2><h3 id="核心程式" data-id="核心程式"><a class="anchor hidden-xs" href="#核心程式" title="核心程式"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>核心程式</span></h3><ol style="padding-left: 2em;">
 <li>
 <p><span>使用 Thread 來執行核心函式</span></p>
@@ -287,8 +292,8 @@
 </code></pre>
 </li>
 <li>
-<p><span>建立終止條件結束無窮迴圈</span></p>
-<pre><code class="C# hljs">​​​​<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Kernel</span>
+<p><span>使用 IDisposable 在解構物件時停止核心迴圈</span></p>
+<pre><code class="C# hljs">​​​​<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Kernel</span> : <span class="hljs-title">IDisposable</span>  <span class="hljs-comment">//  繼承 Disposable 釋放記憶體</span>
 ​​​​{        
 ​​​​    <span class="hljs-keyword">public</span> UserInterfaceDelegate InitializeMessage;
 ​​​​    
@@ -296,6 +301,10 @@
 ​​​​    <span class="hljs-built_in">bool</span> isKernelEnd = <span class="hljs-literal">false</span>;
 ​​​​    
 ​​​​    <span class="hljs-built_in">bool</span> isEmergencyStop = <span class="hljs-literal">false</span>;
+​​​​    
+​​​​    
+​​​​    <span class="hljs-built_in">bool</span> disposed = <span class="hljs-literal">false</span>;
+​​​​    <span class="hljs-keyword">readonly</span> SafeHandle handle = <span class="hljs-keyword">new</span> SafeFileHandle(IntPtr.Zero, <span class="hljs-literal">true</span>);
 ​​​​    
 ​​​​    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Kernel</span>()
 ​​​​</span>    {
@@ -307,11 +316,32 @@
 ​​​​        <span class="hljs-keyword">this</span>.kernelThread.Start();
 ​​​​    }
 ​​​​    
-​​​​    <span class="hljs-comment">//  建立終止條件結束無窮迴圈</span>
-​​​​    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Close</span>()
+​​​​    
+​​​​    ~Kernel()
+​​​​    {
+​​​​        <span class="hljs-keyword">this</span>.Dispose();
+​​​​    }
+​​​​    
+​​​​    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Dispose</span>()
 ​​​​</span>    {
-​​​​        <span class="hljs-keyword">this</span>.isKernelEnd = <span class="hljs-literal">true</span>;
-​​​​        <span class="hljs-keyword">this</span>.isEmergencyStop = <span class="hljs-literal">true</span>;
+​​​​        <span class="hljs-keyword">this</span>.Dispose(<span class="hljs-literal">true</span>);
+​​​​        GC.SuppressFinalize(<span class="hljs-keyword">this</span>);
+​​​​    }
+​​​​    
+​​​​    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Dispose</span>(<span class="hljs-params"><span class="hljs-built_in">bool</span> disposing</span>)
+​​​​</span>    {
+​​​​        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.disposed) <span class="hljs-keyword">return</span>;
+
+​​​​        <span class="hljs-keyword">if</span> (disposing)
+​​​​        {
+​​​​            <span class="hljs-keyword">this</span>.handle.Dispose();
+
+​​​​            <span class="hljs-comment">//  設定終止條件結束無窮迴圈</span>
+​​​​            <span class="hljs-keyword">this</span>.isKernelEnd = <span class="hljs-literal">true</span>;
+​​​​            <span class="hljs-keyword">this</span>.isEmergencyStop = <span class="hljs-literal">true</span>;
+​​​​        }
+
+​​​​        <span class="hljs-keyword">this</span>.disposed = <span class="hljs-literal">true</span>;
 ​​​​    }
 ​​​​    
 ​​​​    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">KernelFunction</span>()
@@ -336,7 +366,7 @@
 ​​​​}
 </code></pre>
 </li>
-</ol><h3 id="class-…" data-id="class-…"><a class="anchor hidden-xs" href="#class-…" title="class-…"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>[class </span><span class="smartypants">…</span><span>]</span></h3></div>
+</ol></div>
     <div class="ui-toc dropup unselectable hidden-print" style="display:none;">
         <div class="pull-right dropdown">
             <a id="tocLabel" class="ui-toc-label btn btn-default" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" title="Table of content">
@@ -346,10 +376,10 @@
                 <div class="toc"><ul class="nav">
 <li><a href="#Demo-KernelThread" title="Demo KernelThread">Demo KernelThread</a><ul class="nav">
 <li><a href="#-說明" title=" 說明"> 說明</a></li>
-<li><a href="#-流程" title=" 流程"> 流程</a></li>
+<li><a href="#-引用範例" title=" 引用範例"> 引用範例</a></li>
+<li><a href="#-步驟" title=" 步驟"> 步驟</a></li>
 <li><a href="#-範例" title=" 範例"> 範例</a><ul class="nav">
 <li><a href="#核心程式" title="核心程式">核心程式</a></li>
-<li><a href="#class-…" title="[class …]">[class …]</a></li>
 </ul>
 </li>
 </ul>
@@ -363,10 +393,10 @@
         <div class="toc"><ul class="nav">
 <li><a href="#Demo-KernelThread" title="Demo KernelThread">Demo KernelThread</a><ul class="nav">
 <li><a href="#-說明" title=" 說明"> 說明</a></li>
-<li><a href="#-流程" title=" 流程"> 流程</a></li>
+<li><a href="#-引用範例" title=" 引用範例"> 引用範例</a></li>
+<li><a href="#-步驟" title=" 步驟"> 步驟</a></li>
 <li><a href="#-範例" title=" 範例"> 範例</a><ul class="nav">
 <li><a href="#核心程式" title="核心程式">核心程式</a></li>
-<li><a href="#class-…" title="[class …]">[class …]</a></li>
 </ul>
 </li>
 </ul>
