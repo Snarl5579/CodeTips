@@ -61,7 +61,7 @@
 <span>頻繁地建立和銷毀執行緒會消耗大量的系統資源。</span></li>
 </ul><p><span>為了避免上述問題，我們預先建立一個執行緒。當有新的任務需要執行時才會執行。任務結束後，執行緒再返回等待下一次分配。</span></p><h2 id="-說明" data-id="-說明"><a class="anchor hidden-xs" href="#-說明" title="-說明"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><img class="emoji offline-handled error-handled" alt=":small_blue_diamond:" src="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/images/basic/small_blue_diamond.png"><span> 說明</span></h2><p><span>Kernel Thread（核心執行緒）作為作業系統核心中的重要組成部分，其撰寫需要特別注意以下幾點：</span></p><ul>
 <li><span>永續運行的迴圈結構</span>
-<div class="alert alert-success">
+<div class="alert alert-info">
 <p><span>Kernel Thread 是一個持續運行的核心執行緒，負責系統的持續運作並對事件做出即時響應。</span></p>
 </div>
 <ul>
@@ -70,7 +70,7 @@
 </ul>
 </li>
 <li><span>等待與執行任務的交替</span>
-<div class="alert alert-success">
+<div class="alert alert-info">
 <p><span>執行緒會週期性地檢查是否有新任務，一旦有任務就會執行，完成後再回到等待狀態，形成一個不斷循環的工作模式。</span></p>
 </div>
 <ul>
@@ -80,7 +80,7 @@
 </ul>
 </li>
 <li><span>緊急中斷機制</span>
-<div class="alert alert-success">
+<div class="alert alert-info">
 <p><span>為了應對緊急情況，執行緒可以在接收到特殊訊號時立即停止當前工作，並進行必要的清理</span></p>
 </div>
 <ul>
@@ -90,7 +90,7 @@
 </ul>
 </li>
 <li><span>完善的例外處理</span>
-<div class="alert alert-success">
+<div class="alert alert-info">
 <p><span>了確保系統穩定，會在執行任務時預先設定機制，用來捕捉並處理各種可能發生的異常，以避免系統崩潰，並採取適當措施來恢復系統狀態或記錄錯誤資訊。</span></p>
 </div>
 <ul>
@@ -99,7 +99,7 @@
 </ul>
 </li>
 <li><span>銷毀執行緒</span>
-<div class="alert alert-success">
+<div class="alert alert-info">
 <p><span>為了讓執行緒能順利終止，必須設定中斷條件或旗標，以便在程式結束時跳出無窮迴圈。</span></p>
 </div>
 <ul>
@@ -374,12 +374,12 @@
             </a>
             <ul id="ui-toc" class="ui-toc-dropdown dropdown-menu" aria-labelledby="tocLabel">
                 <div class="toc"><ul class="nav">
-<li><a href="#Demo-KernelThread" title="Demo KernelThread">Demo KernelThread</a><ul class="nav">
-<li><a href="#-說明" title=" 說明"> 說明</a></li>
-<li><a href="#-引用範例" title=" 引用範例"> 引用範例</a></li>
-<li><a href="#-步驟" title=" 步驟"> 步驟</a></li>
-<li><a href="#-範例" title=" 範例"> 範例</a><ul class="nav">
-<li><a href="#核心程式" title="核心程式">核心程式</a></li>
+<li class=""><a href="#Demo-KernelThread" title="Demo KernelThread">Demo KernelThread</a><ul class="nav">
+<li class=""><a href="#-說明" title=" 說明"> 說明</a></li>
+<li class=""><a href="#-引用範例" title=" 引用範例"> 引用範例</a></li>
+<li class=""><a href="#-步驟" title=" 步驟"> 步驟</a></li>
+<li class=""><a href="#-範例" title=" 範例"> 範例</a><ul class="nav">
+<li class=""><a href="#核心程式" title="核心程式">核心程式</a></li>
 </ul>
 </li>
 </ul>
@@ -391,12 +391,12 @@
     </div>
     <div id="ui-toc-affix" class="ui-affix-toc ui-toc-dropdown unselectable hidden-print" data-spy="affix" style="top:17px;display:none;"  >
         <div class="toc"><ul class="nav">
-<li><a href="#Demo-KernelThread" title="Demo KernelThread">Demo KernelThread</a><ul class="nav">
-<li><a href="#-說明" title=" 說明"> 說明</a></li>
-<li><a href="#-引用範例" title=" 引用範例"> 引用範例</a></li>
-<li><a href="#-步驟" title=" 步驟"> 步驟</a></li>
-<li><a href="#-範例" title=" 範例"> 範例</a><ul class="nav">
-<li><a href="#核心程式" title="核心程式">核心程式</a></li>
+<li class=""><a href="#Demo-KernelThread" title="Demo KernelThread">Demo KernelThread</a><ul class="nav">
+<li class=""><a href="#-說明" title=" 說明"> 說明</a></li>
+<li class=""><a href="#-引用範例" title=" 引用範例"> 引用範例</a></li>
+<li class=""><a href="#-步驟" title=" 步驟"> 步驟</a></li>
+<li class=""><a href="#-範例" title=" 範例"> 範例</a><ul class="nav">
+<li class=""><a href="#核心程式" title="核心程式">核心程式</a></li>
 </ul>
 </li>
 </ul>

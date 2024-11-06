@@ -10,7 +10,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="mobile-web-app-capable" content="yes">
     <title>
-        Demo Startup Form - HackMD
+        Demo DynamicUserControl - HackMD
     </title>
     <link rel="icon" type="image/png" href="https://hackmd.io/favicon.png">
     <link rel="apple-touch-icon" href="https://hackmd.io/apple-touch-icon.png">
@@ -54,191 +54,74 @@
 </head>
 
 <body>
-    <div id="doc" class="markdown-body container-fluid comment-enabled" data-hard-breaks="true"><h1 id="Demo-Startup-Form" data-id="Demo-Startup-Form"><a class="anchor hidden-xs" href="#Demo-Startup-Form" title="Demo-Startup-Form"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>Demo Startup Form</span></h1><p><span>為了提供使用者更流暢的使用體驗，程式在啟動時會先顯示一個啟動畫面。這段時間內，程式會在背景進行一系列的準備工作，包括：</span></p><ul>
-<li><span>載入必要的資源： 這包含了程式執行所需的各種檔案、資料庫連線等。</span></li>
-<li><span>初始化軟體環境： 建立程式運作所需的內部狀態和設定。</span></li>
-<li><span>檢查硬體設備： 確認電腦的硬體配置是否符合程式要求。</span></li>
-</ul><p><span>透過啟動畫面，使用者可以直觀地了解程式正在進行初始化，避免因等待時間過長而感到困惑。當所有準備工作就緒後，程式才會正式進入主要頁面，讓使用者可以開始操作。</span></p><h2 id="-說明" data-id="-說明"><a class="anchor hidden-xs" href="#-說明" title="-說明"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><img class="emoji offline-handled error-handled" alt=":small_blue_diamond:" src="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/images/basic/small_blue_diamond.png"><span> 說明</span></h2><p><span>啟動畫面主要由三個部分組成：</span></p><ul>
+    <div id="doc" class="markdown-body container-fluid comment-enabled" data-hard-breaks="true"><h1 id="Demo-DynamicUserControl" data-id="Demo-DynamicUserControl"><a class="anchor hidden-xs" href="#Demo-DynamicUserControl" title="Demo-DynamicUserControl"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>Demo DynamicUserControl</span></h1><p><span>在開發使用者介面時，動態調整控制項的佈局是一項常見的需求。傳統的佈局方式可能在程式執行時，當控制項數量變化導致介面混亂。利用 .NET 中的 </span><code>TableLayoutPanel</code><span> 與 </span><code>Panel</code><span> 控制項，實現動態新增或刪除控制項時，自動調整使用者介面佈局的功能。這兩個控制項的組合，提供了一種強大的解決方案，能有效應對這種情況。</span></p><h2 id="-說明" data-id="-說明"><a class="anchor hidden-xs" href="#-說明" title="-說明"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><img class="emoji offline-handled error-handled" alt=":small_blue_diamond:" src="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/images/basic/small_blue_diamond.png"><span> 說明</span></h2><p><span>當程式運行時，動態新增或刪除控制項可以使用 .NET 的 </span><code>TableLayoutPanel</code><span> 和 </span><code>Panel</code><span> 來自動調整使用者介面佈局。</span></p><ul>
 <li>
-<p><span>初始頁面：</span></p>
-<div class="alert alert-success">
-<p><span>作為程式啟動時的歡迎畫面，提供使用者友善的視覺回饋。</span></p>
+<p><span>TableLayoutPanel</span></p>
+<div class="alert alert-info">
+<p><span>將使用者介面視為一個表格，每個控制項被放置在特定的行和列中。</span></p>
 </div>
 <ul>
-<li><span>顯示初始化進度，讓使用者了解系統正在準備中。</span></li>
-<li><span>透過動態更新畫面，提升使用者體驗。</span></li>
+<li><span>當調整視窗大小或新增/刪除控制項時，會自動重新計算並調整各控制項的位置</span></li>
+<li><span>透過設定 </span><code>RowStyles</code><span> 和 </span><code>ColumnStyles</code><span> 屬性，可以控制各行各列的大小和比例</span></li>
 </ul>
 </li>
 <li>
-<p><span>主要頁面：</span></p>
-<div class="alert alert-success">
-<p><span>程式的主要操作介面</span></p>
+<p><span>Panel</span></p>
+<div class="alert alert-info">
+<p><span>自動顯示捲軸，讓使用者可以滾動查看所有內容</span></p>
 </div>
-<ul>
-<li><span>在初始化完成後，無縫切換至主要頁面。</span></li>
-</ul>
 </li>
+</ul><h2 id="-引用範例" data-id="-引用範例"><a class="anchor hidden-xs" href="#-引用範例" title="-引用範例"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><img class="emoji offline-handled error-handled" alt=":small_blue_diamond:" src="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/images/basic/small_blue_diamond.png"><span> 引用範例</span></h2><h2 id="-流程" data-id="-流程"><a class="anchor hidden-xs" href="#-流程" title="-流程"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><img class="emoji offline-handled error-handled" alt=":small_blue_diamond:" src="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/images/basic/small_blue_diamond.png"><span> 流程</span></h2><ol style="padding-left: 2em;">
+<li><span>在 </span><code>Form</code><span> 中增加 </span><code>Panel</code><span> 控制項</span></li>
+<li><span>在 </span><code>Panel</code><span> 中增加 </span><code>TableLayoutPanel</code><span> 控制項</span></li>
+<li><span>透過程式進行動態新增控制項，並加入 </span><code>TableLayoutPanel</code><span> 中</span></li>
+<li><span>透過程式進行動態從 </span><code>TabelLayoutPanel</code><span> 中刪除控制項</span></li>
+</ol><h2 id="-步驟" data-id="-步驟"><a class="anchor hidden-xs" href="#-步驟" title="-步驟"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><img class="emoji offline-handled error-handled" alt=":small_blue_diamond:" src="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/images/basic/small_blue_diamond.png"><span> 步驟</span></h2><h3 id="Panel" data-id="Panel"><a class="anchor hidden-xs" href="#Panel" title="Panel"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>Panel</span></h3><ol style="padding-left: 2em;">
+<li><span>從工具箱中，將 </span><code>Panel</code><span> 拉入到 </span><code>Form</code><span> 之中</span></li>
+<li><span>屬性設定頁中，將 </span><code>AutoScroll</code><span> 值設定為 </span><code>true</code><span>：</span><br>
+<span>當 </span><code>Panel</code><span> 中的子控制項超出 </span><code>Panel</code><span> 的可視區域時，讓 </span><code>Panel</code><span> 會自動顯示捲軸。</span></li>
+</ol><h3 id="TableLayoutPanel" data-id="TableLayoutPanel"><a class="anchor hidden-xs" href="#TableLayoutPanel" title="TableLayoutPanel"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>TableLayoutPanel</span></h3><ol style="padding-left: 2em;">
+<li><span>從工具箱中，將 </span><code>TableLayoutPanel</code><span> 拉入到 </span><code>Panel</code><span> 之中</span></li>
+<li><span>屬性設定頁中，將 </span><code>AutoSize</code><span> 值設定為 </span><code>true</code><span>：</span><br>
+<span>讓 </span><code>TableLayoutPanel</code><span> 的大，小依照子控制項來自動調整。</span></li>
+<li><span>屬性設定頁中，將 </span><code>AutoSizeMode</code><span> 值設定為 </span><code>GrowAndShrink</code><span>：</span><br>
+<span>讓 </span><code>TableLayoutPanel</code><span> 調整大小時，可以縮小到比原本設定值還小。</span></li>
+<li><span>屬性設定頁中，將 </span><code>GrowStyel</code><span> 值設定為 </span><code>AddColumns</code><span>:</span><br>
+<span>若是要水平方向的排列控制項，設定為 </span><code>AddColumns</code><span>。若要垂直排列控制項，則設定成 </span><code>AddRows</code></li>
+<li><span>屬性設定頁中，將 </span><code>Columns</code><span> 設定成一個，大小類型調整成 </span><code>AutoSize</code><span>:</span><br>
+<span>預設只需要一個空 </span><code>Column</code><span> ，並且自行調整大小。</span></li>
+<li><span>屬性設定頁中，將 </span><code>Rows</code><span> 設定成一個，大小類型調整成 </span><code>AutoSize</code><span>:</span><br>
+<span>預設只需要一個空 </span><code>Row</code><span> ，並且自行調整大小。</span></li>
+</ol><h3 id="Add-UserControl-Item" data-id="Add-UserControl-Item"><a class="anchor hidden-xs" href="#Add-UserControl-Item" title="Add-UserControl-Item"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>Add UserControl Item</span></h3><ol style="padding-left: 2em;">
 <li>
-<p><span>核心類別：</span></p>
-<div class="alert alert-success">
-<p><span>程式計算核心，提供使用者所有核心功能。</span><br>
-<span>在啟動時，執行一系列初始化作業</span></p>
-</div>
-<ul>
-<li><span>載入必要資源（如設定檔、資料庫連線等）。</span></li>
-<li><span>建立系統物件。</span></li>
-<li><span>進行相關計算。</span></li>
-<li><span>初始化完成後，會向初始頁面發送訊號，觸發頁面轉換。</span></li>
-</ul>
-</li>
-</ul><h2 id="-引用範例" data-id="-引用範例"><a class="anchor hidden-xs" href="#-引用範例" title="-引用範例"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><img class="emoji offline-handled error-handled" alt=":small_blue_diamond:" src="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/images/basic/small_blue_diamond.png"><span> 引用範例</span></h2><ul>
-<li><span>Demo KernelTrhead</span></li>
-<li><span>Demo IDisposable</span></li>
-</ul><h2 id="-步驟" data-id="-步驟"><a class="anchor hidden-xs" href="#-步驟" title="-步驟"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><img class="emoji offline-handled error-handled" alt=":small_blue_diamond:" src="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/images/basic/small_blue_diamond.png"><span> 步驟</span></h2><ol style="padding-left: 2em;">
-<li><span>啟動初始頁面：</span><br>
-<span>程式啟動時，首先顯示初始頁面，並開始進行初始化作業。</span></li>
-<li><span>核心類別初始化：</span><br>
-<span>核心類別在背景執行初始化任務，並定期向初始頁面回傳進度。</span></li>
-<li><span>更新初始頁面：</span><br>
-<span>初始頁面根據核心類別回傳的進度，動態更新畫面，讓使用者了解初始化的進度。</span></li>
-<li><span>完成初始化：</span><br>
-<span>當核心類別的初始化作業全部完成後，會向初始頁面發送「初始化完成」的訊號。</span></li>
-<li><span>切換至主要頁面：</span><br>
-<span>初始頁面接收到訊號後，會關閉自身，並開啟主要頁面，讓使用者開始進行操作。</span></li>
-</ol><h2 id="-範例" data-id="-範例"><a class="anchor hidden-xs" href="#-範例" title="-範例"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><img class="emoji offline-handled error-handled" alt=":small_blue_diamond:" src="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/images/basic/small_blue_diamond.png"><span> 範例</span></h2><h3 id="初始頁面---StartForm" data-id="初始頁面---StartForm"><a class="anchor hidden-xs" href="#初始頁面---StartForm" title="初始頁面---StartForm"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>初始頁面 - StartForm</span></h3><ol style="padding-left: 2em;">
-<li>
-<p><span>Form 屬性 &gt; FormBorderStyle &gt; None</span></p>
-</li>
-<li>
-<p><span>Form 屬性 &gt; StartPosition &gt; CenterScreen</span></p>
-</li>
-<li>
-<p><span>Form 屬性 &gt; ShowIcon &gt; False</span></p>
-</li>
-<li>
-<p><span>Form 屬性 &gt; ShowInTaskbar &gt; False</span></p>
-</li>
-<li>
-<p><span>Form 屬性 &gt; TopMost &gt; True</span></p>
-</li>
-<li>
-<p><span>增加 labelInformation 用來顯示狀態</span></p>
-</li>
-<li>
-<p><span>新增事件通知主要頁面初始化結束</span></p>
-<pre><code class="C# hljs">​​​​<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">delegate</span> <span class="hljs-keyword">void</span> <span class="hljs-title">UserInterfaceDelegate</span>(<span class="hljs-params">UserInterfaceMessageType type, <span class="hljs-built_in">string</span>[] data</span>)</span>;
-
-​​​​<span class="hljs-keyword">public</span> UserInterfaceDelegate InitializeMessage;
+<p><span>新增控制項物件，此處以 </span><code>RadioButton</code><span> 為例子。</span></p>
+<pre><code class="C# hljs">​​​​ <span class="hljs-comment">//  Control Item</span>
+​​​​RadioButton item = <span class="hljs-keyword">new</span> RadioButton()
+​​​​{
+​​​​    Appearance = Appearance.Button,
+​​​​    AutoSize = <span class="hljs-literal">false</span>,
+​​​​    Size = <span class="hljs-keyword">new</span> Size(<span class="hljs-number">150</span>, <span class="hljs-number">200</span>),
+​​​​    Text = <span class="hljs-string">$"<span class="hljs-subst">{index:<span class="hljs-number">00</span>}</span>"</span>,
+​​​​    TextAlign = ContentAlignment.MiddleCenter,
+​​​​    BackColor = Color.LightGreen
+​​​​};
+​​​​item.PreviewKeyDown += RadioButton1PreviewKeyDown;
 </code></pre>
 </li>
 <li>
-<p><span>新增函式處理核心物件的事件通知</span></p>
-<pre><code class="C# hljs">​​​​<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ViewUpdate</span>(<span class="hljs-params">UserInterfaceMessageType type, <span class="hljs-built_in">string</span>[] data</span>)
-​​​​</span>{
-​​​​    <span class="hljs-comment">// 收到初始化結束，關閉初始頁面並發送事件通知主要頁面</span>
-​​​​    <span class="hljs-keyword">if</span> (type == UserInterfaceMessageType.InitializeFinshed)
-​​​​    {
-​​​​        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.InvokeRequired)
-​​​​        {
-​​​​            <span class="hljs-keyword">this</span>.BeginInvoke(<span class="hljs-keyword">new</span> UserInterfaceDelegate(ViewUpdate), type, data);
-​​​​            <span class="hljs-keyword">return</span>;
-​​​​        }
-
-​​​​        <span class="hljs-comment">//  關閉初始頁面</span>
-​​​​        <span class="hljs-keyword">this</span>.Close();
-
-​​​​        <span class="hljs-comment">//  發送事件通知主要頁面</span>
-​​​​        <span class="hljs-keyword">this</span>.InitializeMessage?.Invoke(
-​​​​            UserInterfaceMessageType.InitializeFinshed, <span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>[] { <span class="hljs-string">""</span> });
-​​​​    }
-
-
-​​​​    <span class="hljs-keyword">if</span> (type != UserInterfaceMessageType.InitializeMessage) <span class="hljs-keyword">return</span>;
-​​​​    <span class="hljs-keyword">if</span> (data == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span>;
-​​​​    <span class="hljs-keyword">if</span> (data.Length == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span>;
-
-​​​​    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.labelInformation.InvokeRequired)
-​​​​    {
-​​​​        <span class="hljs-keyword">this</span>.labelInformation.BeginInvoke(<span class="hljs-keyword">new</span> UserInterfaceDelegate(ViewUpdate), type, data);
-​​​​        <span class="hljs-keyword">return</span>;
-​​​​    }
-
-​​​​    <span class="hljs-comment">//  更新初始資訊</span>
-​​​​    <span class="hljs-keyword">this</span>.labelInformation.Text = data[<span class="hljs-number">0</span>];
-​​​​}
-</code></pre>
-</li>
-</ol><h3 id="主要頁面---MainForm" data-id="主要頁面---MainForm"><a class="anchor hidden-xs" href="#主要頁面---MainForm" title="主要頁面---MainForm"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>主要頁面 - MainForm</span></h3><ol style="padding-left: 2em;">
-<li>
-<p><span>新增函式處理初始頁面的事件通知</span></p>
-<pre><code class="C# hljs">​​​​<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Startup</span>(<span class="hljs-params">UserInterfaceMessageType type, <span class="hljs-built_in">string</span>[] data</span>)
-​​​​</span>{
-​​​​    <span class="hljs-keyword">if</span> (type == UserInterfaceMessageType.InitializeFinshed)
-​​​​    {
-​​​​        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.InvokeRequired)
-​​​​        {
-​​​​            <span class="hljs-keyword">this</span>.BeginInvoke(<span class="hljs-keyword">new</span> UserInterfaceDelegate(Startup), type, data);
-​​​​            <span class="hljs-keyword">return</span>;
-​​​​        }
-
-​​​​        <span class="hljs-keyword">this</span>.Show();
-​​​​    }
-​​​​}
+<p><span>此處以水平方向排列新增控制項為例子，在 </span><code>TableLayoutPanel</code><span> 中新增一個 </span><code>Column</code><span>，並設定為 </span><code>AutoSize</code></p>
+<pre><code class="C# hljs">​​​​<span class="hljs-comment">//  TableLayoutPant</span>
+​​​​<span class="hljs-keyword">this</span>.tableLayoutPanel.ColumnCount++;
+​​​​<span class="hljs-keyword">this</span>.tableLayoutPanel.ColumnStyles.Add(newColumnStyle(SizeType.AutoSize));
 </code></pre>
 </li>
 <li>
-<p><span>新增表單關閉事件，通知系統應用程式關閉</span></p>
-<pre><code class="C# hljs">​​​​<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">MainFormClosed</span>(<span class="hljs-params"><span class="hljs-built_in">object</span> sender, FormClosedEventArgs e</span>)
-​​​​</span>{
-​​​​    Application.Exit();
-​​​​}
+<p><span>將控制項加到 </span><code>TableLayoutPanle</code><span> 中</span></p>
+<pre><code class="C# hljs">​​​​<span class="hljs-keyword">this</span>.tableLayoutPanel.Controls.Add(item, index, <span class="hljs-number">0</span>);
 </code></pre>
 </li>
-</ol><h3 id="核心類別---Kernel" data-id="核心類別---Kernel"><a class="anchor hidden-xs" href="#核心類別---Kernel" title="核心類別---Kernel"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>核心類別 - Kernel</span></h3><ol style="padding-left: 2em;">
-<li><span>增加函式進行初始化計算</span><pre><code class="C# hljs">​​​​<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">KernelInitialize</span>()
-​​​​</span>{
-​​​​    <span class="hljs-keyword">this</span>.InitializeMessage?.Invoke(
-​​​​        UserInterfaceMessageType.InitializeMessage,
-​​​​        <span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>[] { <span class="hljs-string">"Unit 1"</span> });
-​​​​    Thread.Sleep(<span class="hljs-number">1000</span>);
-
-​​​​    <span class="hljs-keyword">this</span>.InitializeMessage?.Invoke(
-​​​​        UserInterfaceMessageType.InitializeMessage,
-​​​​        <span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>[] { <span class="hljs-string">"Unit 2"</span> });
-​​​​    Thread.Sleep(<span class="hljs-number">1000</span>);
-
-​​​​    <span class="hljs-keyword">this</span>.InitializeMessage?.Invoke(
-​​​​        UserInterfaceMessageType.InitializeMessage,
-​​​​        <span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>[] { <span class="hljs-string">"Unit 3"</span> });
-​​​​    Thread.Sleep(<span class="hljs-number">1000</span>);
-​​​​}
-</code></pre>
-</li>
-</ol><h3 id="Programcs" data-id="Programcs"><a class="anchor hidden-xs" href="#Programcs" title="Programcs"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>Program.cs</span></h3><ol style="padding-left: 2em;">
-<li><span>建立初始畫面、主要畫面和核心，並且註冊事件</span><pre><code class="C# hljs">​​​​<span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>()
-​​​​</span>{
-​​​​    Application.EnableVisualStyles();
-​​​​    Application.SetCompatibleTextRenderingDefault(<span class="hljs-literal">false</span>);
-
-​​​​    MainForm mainForm = <span class="hljs-keyword">new</span> MainForm();
-
-​​​​    <span class="hljs-comment">//  註冊初始頁面事件，通知主要頁面開啟</span>
-​​​​    StartForm startForm = <span class="hljs-keyword">new</span> StartForm();
-​​​​    startForm.InitializeMessage += mainForm.Startup;
-
-​​​​    <span class="hljs-comment">//  註冊核心物件事件，通知初始頁面更新初始狀態</span>
-​​​​    Kernel core = <span class="hljs-keyword">new</span> Kernel();
-​​​​    core.InitializeMessage += startForm.ViewUpdate;
-
-​​​​    <span class="hljs-comment">//  顯示初始頁面，並且初始化</span>
-​​​​    startForm.Show();
-​​​​    core.Initialize();
-
-​​​​    Application.Run();
-
-​​​​    <span class="hljs-comment">//  釋放記憶體</span>
-​​​​    core.Dispose();
-​​​​}
+</ol><h3 id="Delete-UserControl-Item" data-id="Delete-UserControl-Item"><a class="anchor hidden-xs" href="#Delete-UserControl-Item" title="Delete-UserControl-Item"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>Delete UserControl Item</span></h3><ol style="padding-left: 2em;">
+<li><span>從 </span><code>TableLayoutPanel</code><span> 中移除控制項</span><pre><code class="C# hljs">​​​​<span class="hljs-keyword">this</span>.tableLayoutPanel.Controls.Remove(sender <span class="hljs-keyword">as</span> RadioButton);
 </code></pre>
 </li>
 </ol></div>
@@ -249,15 +132,15 @@
             </a>
             <ul id="ui-toc" class="ui-toc-dropdown dropdown-menu" aria-labelledby="tocLabel">
                 <div class="toc"><ul class="nav">
-<li><a href="#Demo-Startup-Form" title="Demo Startup Form">Demo Startup Form</a><ul class="nav">
+<li class=""><a href="#Demo-DynamicUserControl" title="Demo DynamicUserControl">Demo DynamicUserControl</a><ul class="nav">
 <li><a href="#-說明" title=" 說明"> 說明</a></li>
 <li><a href="#-引用範例" title=" 引用範例"> 引用範例</a></li>
-<li><a href="#-步驟" title=" 步驟"> 步驟</a></li>
-<li><a href="#-範例" title=" 範例"> 範例</a><ul class="nav">
-<li><a href="#初始頁面---StartForm" title="初始頁面 - StartForm">初始頁面 - StartForm</a></li>
-<li><a href="#主要頁面---MainForm" title="主要頁面 - MainForm">主要頁面 - MainForm</a></li>
-<li><a href="#核心類別---Kernel" title="核心類別 - Kernel">核心類別 - Kernel</a></li>
-<li><a href="#Programcs" title="Program.cs">Program.cs</a></li>
+<li><a href="#-流程" title=" 流程"> 流程</a></li>
+<li class=""><a href="#-步驟" title=" 步驟"> 步驟</a><ul class="nav">
+<li><a href="#Panel" title="Panel">Panel</a></li>
+<li><a href="#TableLayoutPanel" title="TableLayoutPanel">TableLayoutPanel</a></li>
+<li><a href="#Add-UserControl-Item" title="Add UserControl Item">Add UserControl Item</a></li>
+<li class=""><a href="#Delete-UserControl-Item" title="Delete UserControl Item">Delete UserControl Item</a></li>
 </ul>
 </li>
 </ul>
@@ -269,15 +152,15 @@
     </div>
     <div id="ui-toc-affix" class="ui-affix-toc ui-toc-dropdown unselectable hidden-print" data-spy="affix" style="top:17px;display:none;"  >
         <div class="toc"><ul class="nav">
-<li><a href="#Demo-Startup-Form" title="Demo Startup Form">Demo Startup Form</a><ul class="nav">
+<li class=""><a href="#Demo-DynamicUserControl" title="Demo DynamicUserControl">Demo DynamicUserControl</a><ul class="nav">
 <li><a href="#-說明" title=" 說明"> 說明</a></li>
 <li><a href="#-引用範例" title=" 引用範例"> 引用範例</a></li>
-<li><a href="#-步驟" title=" 步驟"> 步驟</a></li>
-<li><a href="#-範例" title=" 範例"> 範例</a><ul class="nav">
-<li><a href="#初始頁面---StartForm" title="初始頁面 - StartForm">初始頁面 - StartForm</a></li>
-<li><a href="#主要頁面---MainForm" title="主要頁面 - MainForm">主要頁面 - MainForm</a></li>
-<li><a href="#核心類別---Kernel" title="核心類別 - Kernel">核心類別 - Kernel</a></li>
-<li><a href="#Programcs" title="Program.cs">Program.cs</a></li>
+<li><a href="#-流程" title=" 流程"> 流程</a></li>
+<li class=""><a href="#-步驟" title=" 步驟"> 步驟</a><ul class="nav">
+<li><a href="#Panel" title="Panel">Panel</a></li>
+<li><a href="#TableLayoutPanel" title="TableLayoutPanel">TableLayoutPanel</a></li>
+<li><a href="#Add-UserControl-Item" title="Add UserControl Item">Add UserControl Item</a></li>
+<li class=""><a href="#Delete-UserControl-Item" title="Delete UserControl Item">Delete UserControl Item</a></li>
 </ul>
 </li>
 </ul>

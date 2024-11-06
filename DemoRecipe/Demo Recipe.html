@@ -10,7 +10,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="mobile-web-app-capable" content="yes">
     <title>
-        DemoRecipe - HackMD
+        Demo Recipe - HackMD
     </title>
     <link rel="icon" type="image/png" href="https://hackmd.io/favicon.png">
     <link rel="apple-touch-icon" href="https://hackmd.io/apple-touch-icon.png">
@@ -54,7 +54,7 @@
 </head>
 
 <body>
-    <div id="doc" class="markdown-body container-fluid comment-enabled" data-hard-breaks="true"><h1 id="DemoRecipe" data-id="DemoRecipe"><a class="anchor hidden-xs" href="#DemoRecipe" title="DemoRecipe"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>DemoRecipe</span></h1><p><span>透過繼承 </span><code>BaseConfig</code><span>基底類別，並結合 JSON 格式的彈性，本系統實現了高度可配置化的設定檔管理機制。</span><code>CheckValue</code><span> 方法則提供了一層強健的驗證機制，確保設定值的正確性。當系統升級導致設定檔格式變更時，系統會自動進行版本更新，無需手動干預。</span></p><p><span>優點：</span></p><ul>
+    <div id="doc" class="markdown-body container-fluid comment-enabled" data-hard-breaks="true"><h1 id="Demo-Recipe" data-id="Demo-Recipe"><a class="anchor hidden-xs" href="#Demo-Recipe" title="Demo-Recipe"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><span>Demo Recipe</span></h1><p><span>透過繼承 </span><code>BaseConfig</code><span>基底類別，並結合 JSON 格式的彈性，本系統實現了高度可配置化的設定檔管理機制。</span><code>CheckValue</code><span> 方法則提供了一層強健的驗證機制，確保設定值的正確性。當系統升級導致設定檔格式變更時，系統會自動進行版本更新，無需手動干預。</span></p><p><span>優點：</span></p><ul>
 <li><span>易於閱讀和修改：</span><br>
 <span>JSON 格式具有良好的可讀性，方便人工閱讀和修改，且支持複雜的資料結構，可以靈活地配置各種設定。</span></li>
 <li><span>自動驗證設定值的正確性：</span><br>
@@ -64,7 +64,7 @@
 </ul><h2 id="-說明" data-id="-說明"><a class="anchor hidden-xs" href="#-說明" title="-說明"><span class="octicon octicon-link ph ph-link-simple-horizontal"></span></a><img class="emoji offline-handled error-handled" alt=":small_blue_diamond:" src="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/images/basic/small_blue_diamond.png"><span> 說明</span></h2><p><span>為實現彈性且可擴展的設定檔機制，我們設計了一個基底類別作為所有設定檔類別的基礎。此基底類別內建了基於 JSON 格式的讀寫功能，並強制子類別實作 </span><code>CheckValue</code><span> 方法，用以驗證設定值的合法性。撰寫需要特別注意以下幾點：</span></p><ul>
 <li>
 <p><span>JSON 序列化與反序列化：</span></p>
-<div class="alert alert-success">
+<div class="alert alert-info">
 <p><span>我們採用 .NET 的 </span><code>System.Text.Json</code><span> 類別庫來處理 JSON 格式的資料，該庫提供高效且易於使用的 API。</span></p>
 </div>
 <ul>
@@ -74,7 +74,7 @@
 </li>
 <li>
 <p><span>驗證機制：</span></p>
-<div class="alert alert-success">
+<div class="alert alert-info">
 <p><code>CheckValue</code><span> 方法為設定檔提供了強大的驗證機制，能有效避免因設定錯誤導致的系統異常。</span></p>
 </div>
 <ul>
@@ -85,7 +85,7 @@
 </li>
 <li>
 <p><span>呼叫方式：</span></p>
-<div class="alert alert-success">
+<div class="alert alert-info">
 <p><span>開發人員只需呼叫設定檔物件的 Read 或 Write 方法，即可輕鬆地讀取或寫入設定檔。底層的 JSON 序列化與反序列化操作將由基底類別自動處理。</span></p>
 </div>
 </li>
@@ -268,13 +268,13 @@ example.Read(<span class="hljs-string">"ExampleRecipe.json"</span>);
             </a>
             <ul id="ui-toc" class="ui-toc-dropdown dropdown-menu" aria-labelledby="tocLabel">
                 <div class="toc"><ul class="nav">
-<li><a href="#DemoRecipe" title="DemoRecipe">DemoRecipe</a><ul class="nav">
-<li><a href="#-說明" title=" 說明"> 說明</a></li>
-<li><a href="#-引用範例" title=" 引用範例"> 引用範例</a></li>
-<li><a href="#-流程" title=" 流程"> 流程</a></li>
-<li><a href="#-步驟" title=" 步驟"> 步驟</a><ul class="nav">
-<li><a href="#基底類別---BaseConfig" title="基底類別 - BaseConfig">基底類別 - BaseConfig</a></li>
-<li><a href="#設定檔---ConfigExample" title="設定檔 - ConfigExample">設定檔 - ConfigExample</a></li>
+<li class=""><a href="#Demo-Recipe" title="Demo Recipe">Demo Recipe</a><ul class="nav">
+<li class=""><a href="#-說明" title=" 說明"> 說明</a></li>
+<li class=""><a href="#-引用範例" title=" 引用範例"> 引用範例</a></li>
+<li class=""><a href="#-流程" title=" 流程"> 流程</a></li>
+<li class=""><a href="#-步驟" title=" 步驟"> 步驟</a><ul class="nav">
+<li class=""><a href="#基底類別---BaseConfig" title="基底類別 - BaseConfig">基底類別 - BaseConfig</a></li>
+<li class=""><a href="#設定檔---ConfigExample" title="設定檔 - ConfigExample">設定檔 - ConfigExample</a></li>
 <li><a href="#實際呼叫---MainForm" title="實際呼叫 - MainForm">實際呼叫 - MainForm</a></li>
 </ul>
 </li>
@@ -287,13 +287,13 @@ example.Read(<span class="hljs-string">"ExampleRecipe.json"</span>);
     </div>
     <div id="ui-toc-affix" class="ui-affix-toc ui-toc-dropdown unselectable hidden-print" data-spy="affix" style="top:17px;display:none;"  >
         <div class="toc"><ul class="nav">
-<li><a href="#DemoRecipe" title="DemoRecipe">DemoRecipe</a><ul class="nav">
-<li><a href="#-說明" title=" 說明"> 說明</a></li>
-<li><a href="#-引用範例" title=" 引用範例"> 引用範例</a></li>
-<li><a href="#-流程" title=" 流程"> 流程</a></li>
-<li><a href="#-步驟" title=" 步驟"> 步驟</a><ul class="nav">
-<li><a href="#基底類別---BaseConfig" title="基底類別 - BaseConfig">基底類別 - BaseConfig</a></li>
-<li><a href="#設定檔---ConfigExample" title="設定檔 - ConfigExample">設定檔 - ConfigExample</a></li>
+<li class=""><a href="#Demo-Recipe" title="Demo Recipe">Demo Recipe</a><ul class="nav">
+<li class=""><a href="#-說明" title=" 說明"> 說明</a></li>
+<li class=""><a href="#-引用範例" title=" 引用範例"> 引用範例</a></li>
+<li class=""><a href="#-流程" title=" 流程"> 流程</a></li>
+<li class=""><a href="#-步驟" title=" 步驟"> 步驟</a><ul class="nav">
+<li class=""><a href="#基底類別---BaseConfig" title="基底類別 - BaseConfig">基底類別 - BaseConfig</a></li>
+<li class=""><a href="#設定檔---ConfigExample" title="設定檔 - ConfigExample">設定檔 - ConfigExample</a></li>
 <li><a href="#實際呼叫---MainForm" title="實際呼叫 - MainForm">實際呼叫 - MainForm</a></li>
 </ul>
 </li>
